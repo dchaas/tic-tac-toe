@@ -1,0 +1,73 @@
+:root {
+    --board-width: 3px;
+    --board-color: #3e4444;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+}
+
+header {
+    background-color: #c1946a;
+    background-image: linear-gradient(#c1946a, #e2bc99);
+    box-shadow: 1px 1px 5px 1px #c1946a;
+    color: #3e4444;
+    padding: 5px;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+    text-shadow: 0.5px 0.5px rgba(255, 255, 255,0.5);
+}
+
+h1 {
+    margin-bottom: 0px;
+    font-size: 4rem;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+form {
+    margin-top: 30px;
+}
+
+.board {
+    display: grid;
+    margin-top: 30px;
+    width: clamp(150px,60vw,600px);
+    height: clamp(150px,60vw,600px);
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(3,clamp(50px,20vw,200px));
+    grid-template-rows: repeat(3,clamp(50px,20vw,200px));
+    gap: 0px;
+}
+
+.space {
+    width:  clamp(50px,20vw,200px);
+    height: clamp(50px,20vw,200px);
+    align-self: center;
+    justify-self: center;
+}
+
+#newgame {
+    margin-top: 30px;
+    
+}
+
+#box2, #box8 {
+    border-left: solid var(--board-width) var(--board-color);
+    border-right: solid var(--board-width) var(--board-color);
+}
+
+#box4, #box6 {
+    border-top: solid var(--board-width) var(--board-color);
+    border-bottom: solid var(--board-width) var(--board-color);
+}
+#box5 {
+    border: solid var(--board-width) var(--board-color);
+}

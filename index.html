@@ -8,7 +8,28 @@
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
-
+    <header>
+        <h1>Tic-Tac-Toe</h1>
+        <h3>Need to get three in a row!</h3>
+    </header>
+    <form action="index.html">
+        <label for="player1">Player 1</label>
+        <input type="text" name="player1" placeholder="Name">
+        <label for="player2">Player 2</label>
+        <input type="text" name="player2" placeholder="Name">
+    </form>
+    <div class="board">
+        <div class="space" id="box1"></div>
+        <div class="space" id="box2"></div>
+        <div class="space" id="box3"></div>
+        <div class="space" id="box4"></div>
+        <div class="space" id="box5"></div>
+        <div class="space" id="box6"></div>
+        <div class="space" id="box7"></div>
+        <div class="space" id="box8"></div>
+        <div class="space" id="box9"></div>
+    </div>
+    <button id="newgame">New Game</button>
     <script src="tictactoe.js"></script>
 </body>
 </html>
