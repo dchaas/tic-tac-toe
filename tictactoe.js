@@ -1,11 +1,20 @@
 // create the gameboard with a module
-const Gameboard = (()=> {
-    let gameboard = ['x','x','o','o','x','o','x','o','o'];
+const gameboard = (()=> {
+    let board = ['x','x','o','o','x','o','x','o','o'];
 
-    const render = () => {
-
+    const _render = () => {
+        board.forEach((square,i)=>{
+            // get the DOM element
+            const space = document.querySelector(`#box${i+1}`);
+            space.textContent = square;
+        });
     }
 
+    const updateBoard = function() {
 
-    return  {gameboard};
+    };
+
+    return  {board,updateBoard,_render};
 })();
+
+gameboard._render();
