@@ -97,3 +97,8 @@ form {
     font-family: 'Rubik', sans-serif;
     color: #3e4444;
 }
+
+.space:active {
+    background-color: #c1946a;
+    color: white;
+}
