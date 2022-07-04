@@ -2,6 +2,7 @@
 let Player = (mark) => {
     let _name = 'Player';
     let marker = mark;
+    let AI = false;
 
     const setName = function(newName) {
         _name = newName;
@@ -11,7 +12,16 @@ let Player = (mark) => {
         return _name;
     }
 
-    return {marker, setName, getName}
+    const moveAI = (bd) => {
+        // computer will make a random selection from remaining elements
+        let options = bd.map((val,ind)=> val==='' ? ind : null).filter(val=>val!==null);
+        let rand = options[Math.floor((Math.random()*options.length))]
+        console.log(options);
+        console.log(rand);
+        return rand;
+    }
+
+    return {marker, AI, moveAI, setName, getName}
 };
 
 // create the game state module
@@ -20,6 +30,7 @@ let game = (()=>{
     const player2 = Player('x');
     const namesBtn = document.querySelector('.setnames');
     const form = document.querySelector('form');
+    const checkAI = document.querySelector('input[type=checkbox]');
     let _activePlayer = player1;
     let _gameActive = true;
     let _winner = '';
@@ -59,7 +70,12 @@ let game = (()=>{
         let p1 = document.querySelector('input[name="player1"]');
         let p2 = document.querySelector('input[name="player2"]');
         player1.setName(p1.value);
-        player2.setName(p2.value);
+        if (checkAI.checked) {
+            player2.setName('Computer');
+            player2.AI = true;
+        } else {
+            player2.setName(p2.value);
+        }
         p1.value = '';
         p2.value = '';
         form.style.visibility = 'hidden';
@@ -137,6 +153,11 @@ const gameboard = ((gm)=> {
             console.log(gm);
             playing = gm.checkResult(board);
             gm.changePlayer();
+            console.log(playing,gm.getActivePlayer().AI);
+            if (playing && gm.getActivePlayer().AI) {
+                let move = gm.getActivePlayer().moveAI(board);
+                spaces[move].click();
+            }
             
             _render();
         } 
