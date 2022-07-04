@@ -18,16 +18,24 @@ let Player = (mark) => {
 let game = (()=>{
     const player1 = Player('o');
     const player2 = Player('x');
+    const namesBtn = document.querySelector('.setnames');
+    const form = document.querySelector('form');
     let _activePlayer = player1;
     let _gameActive = true;
     let _winner = '';
     const turn = document.querySelector('#name');
 
     const _render = function() {
-        if (!_gameActive) {
-            turn.innerHTML=`Game Over - ${_winner.toUpperCase()} wins!`;    
+        if ((!_gameActive) && (_winner==='')) {
+            turn.innerHTML=`Game Over - DRAW!`;
+            turn.classList.add('gameover');    
+        } else if (!_gameActive) {
+            let winPlayer = _winner===player1.marker ? player1 : player2;
+            turn.innerHTML=`Game Over - ${winPlayer.getName().toUpperCase()} with ${winPlayer.marker.toUpperCase()}s wins!`;    
+            turn.classList.add('gameover');
         } else {
-            turn.innerHTML=`Turn: ${_activePlayer.getName()} (${_activePlayer.marker})`;
+            turn.innerHTML=`${_activePlayer.getName()}'s turn - ${_activePlayer.marker.toUpperCase()}s`;
+            turn.classList.remove('gameover');
         }
     };
 
@@ -43,8 +51,20 @@ let game = (()=>{
     const newGame = ()=> {
         _gameActive = true;
         _activePlayer = player1;
+        form.style.visibility = 'visible';
+        _winner = '';
     };
 
+    const setNames = ()=> {
+        let p1 = document.querySelector('input[name="player1"]');
+        let p2 = document.querySelector('input[name="player2"]');
+        player1.setName(p1.value);
+        player2.setName(p2.value);
+        p1.value = '';
+        p2.value = '';
+        form.style.visibility = 'hidden';
+        _render();
+    };
 
     const checkResult = function(bd) {            
         console.log(bd[0],bd[1],bd[2]);
@@ -79,6 +99,7 @@ let game = (()=>{
         return _gameActive;
     };
 
+    namesBtn.addEventListener('click',setNames);
     _render();
     return {getActivePlayer,changePlayer,checkResult,newGame};
 })();
@@ -114,6 +135,7 @@ const gameboard = ((gm)=> {
             let index = event.target.id.replace('box','');
             board[index-1] = gm.getActivePlayer().marker;
             console.log(gm);
+            playing = gm.checkResult(board);
             gm.changePlayer();
             
             _render();
