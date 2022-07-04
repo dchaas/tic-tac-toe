@@ -75,6 +75,7 @@ let game = (()=>{
             player2.AI = true;
         } else {
             player2.setName(p2.value);
+            player2.AI = false;
         }
         p1.value = '';
         p2.value = '';
